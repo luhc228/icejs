@@ -43,10 +43,10 @@
     "rimraf": "^3.0.0",
     "simple-git": "^1.132.0",
     "ts-node": "^8.6.1",
-    "typescript": "^3.7.4"
+    "typescript": "^3.7.4",
+    "dependency-check": "^4.1.0"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "dependency-check": "^4.1.0"
+    "core-js": "^3.6.4"
   }
 }
