@@ -54,6 +54,8 @@ const plugin: IPlugin = ({ context, onGetWebpackConfig, modifyUserConfig, getVal
   fse.copySync(path.join(__dirname, '../src/types/index.ts'), path.join(iceTempPath, 'router/types.ts'));
   applyMethod('addIceTypesExport', { source: './router/types', specifier: '{ IAppRouterProps }', exportName: 'router?: IAppRouterProps' });
 
+  applyMethod('addIceTypesExport', { source: './router/types', specifier: '{ IRenderRouteProps as IRouterConfig }' });
+
   // modify webpack config
   onGetWebpackConfig((config) => {
     // add alias

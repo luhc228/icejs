@@ -9,8 +9,8 @@ function generateExports(exportList: IExportData[]) {
       const symbol = source.includes('types') ? ';' : ',';
       importStatements.push(`import ${specifier || exportName} from '${source}';`);
       exportStatements.push(`${exportName}${symbol}`);
-    } else if(source) {
-      importStatements.push(`export * from '${source}';`);
+    } else if (source) {
+      importStatements.push(`export ${specifier || '*'} from '${source}';`);
     }
   });
   return {
