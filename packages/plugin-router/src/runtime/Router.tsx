@@ -9,7 +9,8 @@ import {
 
   RouteComponentProps
 } from 'react-router-dom';
-import { RoutesProps, RouterProps, IRouteWrapper, IDynamicImportComponent, RouteItemProps } from '../types/router';
+import { RoutesProps, RouterProps } from '../types/router';
+import { IRouteWrapper, IDynamicImportComponent, RouteItemProps } from '../types/base';
 import { IRouterConfig } from '../types';
 
 function wrapperRoute(component, routerWrappers) {

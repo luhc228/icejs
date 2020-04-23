@@ -7,8 +7,8 @@ export interface IApp {
   addProvider?: ({ children }: { children: React.ReactNode }) => React.ComponentType;
   getInitialData?: () => Promise<any>;
   [key: string]: any;
-  <% if (icePluginsTypesExports) { %>
-  <%- icePluginsTypesExports %>
+  <% if (iceIAppTypesExports) { %>
+  <%- iceIAppTypesExports %>
   <% } %>
 }
 
