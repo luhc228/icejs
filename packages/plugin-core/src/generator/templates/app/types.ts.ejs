@@ -6,6 +6,10 @@ export interface IApp {
   mountNode?: HTMLElement;
   addProvider?: ({ children }: { children: React.ReactNode }) => React.ComponentType;
   getInitialData?: () => Promise<any>;
+  [key: string]: any;
+  <% if (iceIAppTypesExports) { %>
+  <%- iceIAppTypesExports %>
+  <% } %>
 }
 
 <% if (iceTypesExports) { %>

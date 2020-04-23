@@ -20,7 +20,7 @@ interface IRenderFile {
   (templatePath: string, targetDir: string, extraData?: IRenderData): void;
 }
 
-const API_MAP = ['addEntryImports', 'addEntryCode', 'addIceExport', 'addIceTypesExport'];
+const API_MAP = ['addEntryImports', 'addEntryCode', 'addIceExport', 'addIceTypesExport', 'addIceIAppTypesExport'];
 
 export default class Generator {
   public templateDir: string;
@@ -50,7 +50,7 @@ export default class Generator {
     this.showPrettierError = true;
   }
 
-  public addExport = (registerKey ,exportData: IExportData|IExportData[]) => {
+  public addExport = (registerKey, exportData: IExportData | IExportData[]) => {
     const exportList = this.contentRegistration[registerKey] || [];
     checkExportData(exportList, exportData, registerKey);
     this.addContent(registerKey, exportData);
@@ -59,7 +59,7 @@ export default class Generator {
     }
   }
 
-  public removeExport = (registerKey: string, removeExportName: string|string[]) => {
+  public removeExport = (registerKey: string, removeExportName: string | string[]) => {
     const exportList = this.contentRegistration[registerKey] || [];
     this.contentRegistration[registerKey] = removeExportData(exportList, removeExportName);
     if (this.rerender) {
@@ -95,11 +95,12 @@ export default class Generator {
   }
 
   public parseRenderData() {
-    const globalStyles = globby.sync(['src/global.@(scss|less|css)'], { cwd: this.projectRoot});
+    const globalStyles = globby.sync(['src/global.@(scss|less|css)'], { cwd: this.projectRoot });
     this.renderData = {
       ...this.renderData,
       ...this.getExportStr('addIceExport', ['iceImports', 'iceExports']),
       ...this.getExportStr('addIceTypesExport', ['iceTypesImports', 'iceTypesExports']),
+      ...this.getExportStr('addIceIAppTypesExport', ['iceIAppTypesImports', 'iceIAppTypesExports']),
       globalStyle: globalStyles.length && globalStyles[0],
       entryImportsBefore: this.generateImportStr('addEntryImports_before'),
       entryImportsAfter: this.generateImportStr('addEntryImports_after'),
@@ -118,7 +119,7 @@ export default class Generator {
 
   public async render() {
     this.rerender = true;
-    const ejsTemplates = await globby(['**/*'], { cwd: this.templateDir});
+    const ejsTemplates = await globby(['**/*'], { cwd: this.templateDir });
     this.parseRenderData();
     ejsTemplates.forEach((template) => {
       const templatePath = path.join(this.templateDir, template);
@@ -135,7 +136,7 @@ export default class Generator {
 
   public renderFile: IRenderFile = (templatePath, targetPath, extraData = {}) => {
     const templateContent = fse.readFileSync(templatePath, 'utf-8');
-    let content = ejs.render(templateContent, {...this.renderData, ...extraData});
+    let content = ejs.render(templateContent, { ...this.renderData, ...extraData });
     try {
       content = prettier.format(content, {
         parser: 'typescript',

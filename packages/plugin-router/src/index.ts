@@ -57,6 +57,7 @@ const plugin: IPlugin = ({ context, onGetWebpackConfig, modifyUserConfig, getVal
   // export IRouterConfig to the public
   applyMethod('addIceTypesExport', { source: './router/types' });
 
+  applyMethod('addIceIAppTypesExport', { source: './router/types', specifier: '{ IAppRouterProps }', exportName: 'router?: IAppRouterProps' });
   // modify webpack config
   onGetWebpackConfig((config) => {
     // add alias
