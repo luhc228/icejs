@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fse from 'fs-extra';
 import { IPlugin } from '@alib/build-scripts';
-import { IRouterOptions } from './types';
+import { IRouterOptions } from './types/router';
 import walker from './collector/walker';
 
 // compatible with $ice/routes
@@ -55,7 +55,7 @@ const plugin: IPlugin = ({ context, onGetWebpackConfig, modifyUserConfig, getVal
   // set IAppRouterProps to IAppConfig
   applyMethod('addIceTypesExport', { source: './router/types', specifier: '{ IAppRouterProps }', exportName: 'router?: IAppRouterProps' });
   // export IRouterConfig to the public
-  applyMethod('addIceTypesExport', { source: './router/types', specifier: '{ IRenderRouteProps as IRouterConfig }' });
+  applyMethod('addIceTypesExport', { source: './router/types' });
 
   // modify webpack config
   onGetWebpackConfig((config) => {
