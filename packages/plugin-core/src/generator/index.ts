@@ -20,7 +20,7 @@ interface IRenderFile {
   (templatePath: string, targetDir: string, extraData?: IRenderData): void;
 }
 
-const API_MAP = ['addEntryImports', 'addEntryCode', 'addIceExport', 'addIceTypesExport', 'addIceIAppTypesExport'];
+const API_MAP = ['addEntryImports', 'addEntryCode', 'addIceExport', 'addIceTypesExport', 'addIcePluginsTypesExport'];
 
 export default class Generator {
   public templateDir: string;
@@ -100,7 +100,7 @@ export default class Generator {
       ...this.renderData,
       ...this.getExportStr('addIceExport', ['iceImports', 'iceExports']),
       ...this.getExportStr('addIceTypesExport', ['iceTypesImports', 'iceTypesExports']),
-      ...this.getExportStr('addIceIAppTypesExport', ['iceIAppTypesImports', 'iceIAppTypesExports']),
+      ...this.getExportStr('addIcePluginsTypesExport', ['icePluginsTypesImports', 'icePluginsTypesExports']), // add plugin types to the IApp
       globalStyle: globalStyles.length && globalStyles[0],
       entryImportsBefore: this.generateImportStr('addEntryImports_before'),
       entryImportsAfter: this.generateImportStr('addEntryImports_after'),
