@@ -6,6 +6,8 @@ export interface IApp {
   mountNode?: HTMLElement;
   addProvider?: ({ children }: { children: React.ReactNode }) => React.ComponentType;
   getInitialData?: () => Promise<any>;
+  ErrorBoundaryFallback?: React.ReactElement,
+  onErrorBoundaryHander?: (error: Error, componentStack: string) => any;
   [key: string]: any;
   <% if (iceIAppTypesExports) { %>
   <%- iceIAppTypesExports %>
