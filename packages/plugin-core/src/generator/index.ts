@@ -101,8 +101,7 @@ export default class Generator {
       ...this.renderData,
       ...this.getExportStr('addIceExport', ['iceImports', 'iceExports']),
       ...this.getExportStr('addIceTypesExport', ['iceTypesImports', 'iceTypesExports']),
-      // ...this.getExportStr('addIceIAppTypesExport', ['iceIAppTypesImports', 'iceIAppTypesExports']), // add plugin types to the IApp
-      ...this.getExportStr('addIceAppConfigTypes', ['iceIAppConfigTypesImports', 'iceIAppConfigTypesExports', 'iceIAppTypesExports']), // add plugin types to the IApp
+      ...this.getExportStr('addIceAppConfigTypes', ['iceIAppConfigTypesImports', 'iceIAppConfigTypesExports', 'iceIAppTypesExports']), // add types to the AppConfig & IApp
       globalStyle: globalStyles.length && globalStyles[0],
       entryImportsBefore: this.generateImportStr('addEntryImports_before'),
       entryImportsAfter: this.generateImportStr('addEntryImports_after'),
