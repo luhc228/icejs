@@ -28,18 +28,20 @@ export default async (api) => {
 
   // add babel plugins for ice lazy
   const { configPath } = userConfig.router || {};
+  const { mpa: isMpa } = userConfig;
   const { routesPath } = applyMethod('getRoutes', {
     rootDir,
     tempDir: targetPath,
     configPath,
-    projectType
+    projectType,
+    isMpa
   });
   modifyUserConfig('babelPlugins',
     [
       ...(userConfig.babelPlugins as [] || []),
       [
         require.resolve('./babelPluginReplacePath'),
-        { routesPath, alias: userConfig.alias }
+        { routesPath, alias: userConfig.alias, applyMethod }
       ]
     ]
   );
