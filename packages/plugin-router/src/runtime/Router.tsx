@@ -52,15 +52,17 @@ function parseRoutes(routes: RouteItemProps[]) {
 
 export function IceRouter(props: RouterProps) {
   const { type, routes, fallback, ...others } = props;
-  const RouterComponent = type === 'static' ? StaticRouter : Router;
-
   // parse routes before render
   const parsedRoutes = parseRoutes(routes);
-  return (
-    <RouterComponent {...others}>
-      <Routes routes={parsedRoutes} fallback={fallback} />
-    </RouterComponent>
-  );
+
+  const children = <Routes routes={parsedRoutes} fallback={fallback} />;
+  return type === 'static' ?
+    <StaticRouter {...others}>
+      {children}
+    </StaticRouter> :
+    <Router {...others}>
+      {children}
+    </Router>;
 }
 
 function Routes({ routes, fallback }: RoutesProps) {

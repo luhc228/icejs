@@ -1,3 +1,4 @@
+import { History } from 'history';
 import { IgnoreOptions } from './collector';
 import { IRouterConfig } from '.';
 import { RouteItemProps } from './base';
@@ -17,6 +18,7 @@ export interface RouterProps {
   initialEntries?: string[];
   initialIndex?: number;
   fallback?: React.ReactNode;
+  history: History;
 };
 
 export interface RoutesProps {
